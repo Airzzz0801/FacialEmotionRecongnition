@@ -59,7 +59,7 @@ class VideoCamera(object):
             center = (x + w//2, y + h//2)
             image = cv2.ellipse(image, center, (w//2, h//2), 0, 0, 360, (255, 0, 255), 4)
             i = np.argmax(predictions, axis=1)
-            cv2.putText(image,labelNames[i[0]],(50, 60),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),4,8)
+            cv2.putText(image,labelNames[i[0]],(x, y),cv2.FONT_HERSHEY_SIMPLEX,2,(0,0,255),4,8)
             # faceROI = gray[y:y+h,x:x+w]
             #-- In each face, detect eyes
             # eyes = eyes_cascade.detectMultiScale(faceROI)

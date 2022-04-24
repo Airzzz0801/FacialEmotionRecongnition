@@ -2,7 +2,7 @@ from django.db import models
 from django.shortcuts import render
 from django.conf import settings
 from django import forms
-
+import cv2
 from modelcluster.fields import ParentalKey
 
 from wagtail.admin.edit_handlers import (
@@ -20,7 +20,7 @@ from django.core.files.storage import default_storage
 from pathlib import Path
 
 from streams import blocks
-
+from cam_app2 import predictImg
 import sqlite3, datetime, os, uuid, glob
 
 str_uuid = uuid.uuid4()  # The UUID for image uploading
@@ -94,18 +94,29 @@ class ImagePage(Page):
             reset()
             self.reset_context(request)
             context["my_uploaded_file_names"] = []
+            context["my_result_file_names"] = []
             for file_obj in request.FILES.getlist("file_data"):
                 uuidStr = uuid.uuid4()
                 filename = f"{file_obj.name.split('.')[0]}_{uuidStr}.{file_obj.name.split('.')[-1]}"
+                filename1 = filename
                 with default_storage.open(Path(f"uploadedPics/{filename}"), 'wb+') as destination:
                     for chunk in file_obj.chunks():
                         destination.write(chunk)
                 filename = Path(f"{settings.MEDIA_URL}uploadedPics/{file_obj.name.split('.')[0]}_{uuidStr}.{file_obj.name.split('.')[-1]}")
+                filename_result = Path(f"{settings.MEDIA_URL}Result/{file_obj.name.split('.')[0]}_{uuidStr}.{file_obj.name.split('.')[-1]}")
+                with default_storage.open(Path(f"Result/{filename1}"), 'wb+') as destination:
+                    imgresult = predictImg.preditImg(str(filename))
+                    destination.write(imgresult)
                 with open(Path(f'{settings.MEDIA_ROOT}/uploadedPics/img_list.txt'), 'a') as f:
                     f.write(str(filename))
                     f.write("\n")
-
+                with open(Path(f'{settings.MEDIA_ROOT}/Result/Result.txt'), 'a') as f:
+                    f.write(str(filename_result))
+                    f.write("\n")
                 context["my_uploaded_file_names"].append(str(f'{str(filename)}'))
+                context["my_result_file_names"].append(str(f'{str(filename_result)}'))
+
+
             return render(request, "cam_app2/image.html", context)
 
 
