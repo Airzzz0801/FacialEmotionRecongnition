@@ -13,9 +13,11 @@ from django.http import StreamingHttpResponse
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+from play_video import views as play_views
 
 
 urlpatterns = [
+    path('play_video/',play_views.PlayVideoView.as_view(),name='play_video'),
 
     path('django-admin/', admin.site.urls),
 
