@@ -3,12 +3,10 @@ from cam_app import predictModel
 import numpy as np
 from PIL import Image
 from io import BytesIO
-
 labelNames = ["Angry", "Disgust", "Fear", "Happy", "Sad", "Surprise", "Neutral"]
 def preditImg(path):
     if predictModel.model == None:
         predictModel.load_model()
-    print(path)
     # 从文件读取图片
     img = cv2.imread("mysite"+path)
     # 转为灰度图片

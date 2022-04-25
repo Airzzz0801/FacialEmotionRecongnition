@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block extra_css %}
+    <style>
+      body{
+        padding-top: 100px;
+      }
+    </style>
+{% endblock %}
+{% block content %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+<center><h1 class="display-4">{{ page.name_title }}</h1></center>
+
+<center>
+  <div class="container-fluid" style="height:100%; padding-top:3%; display: block; overflow: auto;">
+    <h4>If video does not load, please refresh the page:</h4>
+    <div class="videoWrapper">
+        <style>
+        .videoWrapper {
+          position=absolute;
+          height=100%;
+        }
+        .videoWrapper iframe {
+          display: inline;
+          height: 450px; width: 790px; border: 2px solid #ccc;max-width: 100%;
+          margin-bottom:200px;
+          position: relative;
+        }
+        .video-container{
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 30px;
+            height: 0;
+            overflow: hidden;
+        }
+      </style>
+      <!-- <img id="frame1" style="-webkit-user-select: none;" src="../no_video/" width="800px" height="700px"> -->
+<!--      <iframe id="frame1" class="responsive-iframe"  src="../no_video/" title="YouTube video player" frameborder="0" scrolling="no" ></iframe>-->
+        <iframe id="frame1" type="text/html" width="720" height="405" src="{{page.video_url}}"
+                frameborder="0" allowfullscreen></iframe>
+    </div>
+   
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <style>
+       .choose-file-button {
+          flex-shrink: 0;
+          /* background-color: rgba(255, 255, 255, 0.04); */
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 3px;
+          padding: 8px 15px;
+          margin-right: 10px;
+          font-size: 12px;
+          text-transform: uppercase
+        }
+        .file-input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          widows: 100%;
+          cursor: pointer;
+          opacity: 0
+        }
+
+
+        </style>
+        <script type="text/javascript">
+      $(document).on('change', '.file-input', function() {
+          var filesCount = $(this)[0].files.length;
+          var textbox = $(this).prev();
+          if (filesCount === 1) {
+          var fileName = $(this).val().split('\\').pop();
+          textbox.text(fileName);
+          } else {
+          textbox.text(filesCount + ' files selected');
+          }
+          if (typeof (FileReader) != "undefined") {
+          var dvPreview = $("#divVideoMediaPreview");
+          dvPreview.html("");
+          var index =0;
+          $($(this)[0].files).each(function () {
+          var file = $(this);
+          var reader = new FileReader();
+          reader.onload = function (e) {
+          var video = $("<video />");
+          video.attr("style", "width: 150px; height:100px; padding: 10px");
+          video.attr("src", e.target.result);
+          viedo.attr("name", name+index);
+          index=index+1;
+          dvPreview.append(video);
+          }
+          reader.readAsDataURL(file[0]);
+          });
+          } else {
+          alert("This browser does not support HTML5 FileReader.");
+          }
+          });
+    </script>
+    <form class="input-group mb-3" method="POST" enctype="multipart/form-data" id="form1">
+          <div class="file-drop-area"> <span class="choose-file-button btn-primary">Choose Files</span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple> </div>
+          {% csrf_token %}
+          <div class="container-fluid p-2">
+                <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>
+          </div>
+    </form>
+</div>
+</center>
+{% endblock %}
