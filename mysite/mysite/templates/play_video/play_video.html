@@ -38,8 +38,10 @@
 <!--      <iframe id="frame1" class="responsive-iframe"  src="../no_video/" title="YouTube video player" frameborder="0" scrolling="no" ></iframe>-->
         <iframe id="frame1" type="text/html" width="720" height="405" src="{{page.video_url}}"
                 frameborder="0" allowfullscreen></iframe>
+        <div style="background-color: #999999;width:762px;height: 10px "></div>
+        <div id = "outputtests">{{page.reflectionlists}}</div>
     </div>
-   
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
        .choose-file-button {
@@ -64,6 +66,8 @@
 
 
         </style>
+      <script type="text/javascript">
+      </script>
         <script type="text/javascript">
       $(document).on('change', '.file-input', function() {
           var filesCount = $(this)[0].files.length;
@@ -97,7 +101,7 @@
           });
     </script>
     <form class="input-group mb-3" method="POST" enctype="multipart/form-data" id="form1">
-          <div class="file-drop-area"> <span class="choose-file-button btn-primary">Choose Files</span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple> </div>
+          <div class="file-drop-area"> <span class="choose-file-button btn-primary">Choose Files</span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".mp4" multiple> </div>
           {% csrf_token %}
           <div class="container-fluid p-2">
                 <button class="btn btn-primary" type="submit" id="inputGroupFileAddon04">Upload</button>

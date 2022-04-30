@@ -32,7 +32,7 @@ INSTALLED_APPS = INSTALLED_APPS = [
     'cam_app',
     'cam_app2',
     'play_video',
-
+    'reflections',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
