@@ -1,4 +1,0 @@
-<<<<<<< HEAD
-=======
-\media\uploadedPics\src=http___inews_463d4538-47f6-46a2-b666-191e065cb273.jpg
->>>>>>> d6a8b7d349e0bd3ff96265b1d4ceb4d025f52d5a
