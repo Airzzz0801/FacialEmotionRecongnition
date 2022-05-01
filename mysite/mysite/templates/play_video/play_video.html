@@ -38,10 +38,33 @@
 <!--      <iframe id="frame1" class="responsive-iframe"  src="../no_video/" title="YouTube video player" frameborder="0" scrolling="no" ></iframe>-->
         <iframe id="frame1" type="text/html" width="720" height="405" src="{{page.video_url}}"
                 frameborder="0" allowfullscreen></iframe>
-        <div style="background-color: #999999;width:762px;height: 10px "></div>
-        <div id = "outputtests">{{page.reflectionlists}}</div>
+        <div style="background-color:rgba(255,255,255,0);width:762px;height: 10px ">
+            {% for reflection in page.reflectionlists %}
+            {% if reflection == 0 %}<div class = "colorblock" style="background-color: darkred;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 1%} <div class = "colorblock" style="background-color: black;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 2%} <div class = "colorblock" style="background-color: purple;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 3%} <div class = "colorblock" style="background-color: yellow;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 4%} <div class = "colorblock" style="background-color: blue;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 5%} <div class = "colorblock" style="background-color: pink;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 6%} <div class = "colorblock" style="background-color: white;width:auto;height: 10px;float: left"></div>
+            {% elif reflection == 8%} <div class = "colorblock" style="background-color: white;width:auto;height: 10px;float: left"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+<!--        <div id = "outputtests" type="hidden">{{page.reflectionlists}}</div>-->
+        <div id = "outputtest" hidden="hidden">{{page.length}}</div>
     </div>
-
+    <script type="text/javascript">
+        var p1 = document.querySelectorAll(".colorblock")
+        var p2 = document.getElementById("outputtest").innerHTML
+        p2=p2*100+'%'
+        domLen = p1.length;
+        for (var i = 0; i < domLen; i++) {
+            var v = p1[i];
+            // do something you want deal with DOM
+            v.style.width=p2
+        }
+    </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
        .choose-file-button {
@@ -66,8 +89,6 @@
 
 
         </style>
-      <script type="text/javascript">
-      </script>
         <script type="text/javascript">
       $(document).on('change', '.file-input', function() {
           var filesCount = $(this)[0].files.length;

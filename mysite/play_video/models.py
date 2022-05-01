@@ -32,7 +32,8 @@ class PlayVideoPage(Page):
     template = "play_video/play_video.html"
 
     max_count = 2
-    reflectionlists=[]
+    reflectionlists={}
+    length = float(0)
     name_title = models.CharField(max_length=100, blank=False, null=True)
     video_url = models.URLField(max_length=100, blank=False, null=True)
     video_num = models.PositiveIntegerField(blank = False)
@@ -56,7 +57,9 @@ class PlayVideoPage(Page):
         for reflection_item in reflectionList:
             numpy_result = np.append(reflectionList_numpy,np.matrix(reflection_item.video_reflection),axis=0)
         # print("# a的每⼀列中最常见的成员为：{}，分别出现了{}次。".format(stats.mode(numpy_result)[0][0], stats.mode(numpy_result)[1][0]))
-        self.reflectionlists.append(stats.mode(numpy_result)[0][0])
+        self.reflectionlists={}
+        self.reflectionlists=stats.mode(numpy_result)[0][0]
+        self.length=1/len(self.reflectionlists)
         #     for i in np.hsplit(numpy_result, np.shape(numpy_result)[1]):
         #         print(np.shape(i.transpose()))
         #         print(i.transpose())
