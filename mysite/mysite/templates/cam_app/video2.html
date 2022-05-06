@@ -18,16 +18,16 @@
   <div class="container-fluid" style="height:100%; padding-top:3%; display: block; overflow: auto;">
     <div class="row" style="padding-bottom:1%;">
       <div class="col-6">
-        <button type="button" onclick="changeTheVariableStart()" id="pushMe3" class="btn btn-primary" name="button3">Start</button>
+        <button type="button" onclick="changeTheVariableStart()" id="pushMe3" class="blue button" name="button3">Start</button>
       </div>
       <div class="col-6">
-        <button type="button" onclick="changeTheVariableStop()" id="pushMe4" class="btn btn-primary" name="button4">Stop</button>
+        <button type="button" onclick="changeTheVariableStop()" id="pushMe4" class="red button" name="button4">Stop</button>
       </div>
     </div>
     <h4>If video does not load, click the below buttons:</h4>
       <center>
         <div style="margin-bottom:10px;">
-          <a type="button" id="ntbtn1" href="../no_video/" target="_blank" class="btn btn-primary" name="button" style="color:white">View in new tab</a>
+          <a type="button" id="ntbtn1" href="../no_video/" target="_blank" class="blue button" name="button" style="color:white">View in new tab</a>
         </div>
       </center>
     <div class="videoWrapper">
@@ -42,10 +42,11 @@
           margin-bottom:200px;
           position: relative;
         }
+
       </style>
  
       <!-- <img id="frame1" style="-webkit-user-select: none;" src="../no_video/" width="800px" height="700px"> -->
-      <iframe id="frame1" class="responsive-iframe"  src="../no_video/" title="YouTube video player" frameborder="0" scrolling="no" ></iframe>
+      <iframe id="frame1" class="responsive-iframe"  src="../no_video/" title="YouTube video player" frameborder="0" scrolling="no" style="background: white" ></iframe>
 
     </div>
 </div>

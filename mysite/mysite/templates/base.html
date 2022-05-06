@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/buttonstyle.css' %}">
+        <link rel="shortcut icon" href="{% static 'icons/icons_bs/icons/favicon.ico' %}"/>
         <meta charset="utf-8" />
         <title>
             {% block title %}
@@ -29,7 +32,7 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}" style="height:100%;">
+    <body class="{% block body_class %}{% endblock %}" style="height:100%;background-image: url({% static 'background.jpeg' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:fixed">
         {% wagtailuserbar %}
 
         <nav class="navbar navbar-expand-lg navbar-dark  fixed-top" style="background-color:  #335577;">
@@ -142,7 +145,7 @@
                   />
                   <p style="text-align: left;"><i class="bi bi-building"></i>&nbsp; <a style="text-decoration:none;" class="text-white" href="https://goo.gl/maps/PkCC26pqUeZbCh6F9" target="_blank">FEIT - UTS, 15 Broadway, Ultimo NSW 2007, Australia</a></p>
                   <p style="text-align: left;"><a style="text-decoration:none; word-wrap: break-word;" class="text-white" href="mailto:email@email.com"><i class="bi bi-envelope-fill"></i> </a>&nbsp; <a style="text-decoration:none; word-wrap: break-word; font-size:0.88em;" class="text-white" href="mailto:someone@something.com" target="_blank">someone@someting.com</a></p>
-                  <p style="text-align: left;"><i class="bi bi-phone-fill"></i>&nbsp;<a style="text-decoration:none;" class="text-white" href="tel:+61 1234 5678"> +61 1234 5678</a></p>
+                  <p style="text-align: left;"><i class="bi bi-phone-fill"></i>&nbsp;<a style="text-decoration:none;" class="text-white" href="tel:+61 4227 6517"> +61 4227 6517</a></p>
             </div>
             <!-- Grid column -->
           </div>

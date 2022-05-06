@@ -51,11 +51,11 @@ class PlayVideoPage(Page):
 
     def serve(self, request):
         reflectionList = list(reflection.objects.filter(video_num=self.video_num))
-        reflectionList_numpy = np.matrix(reflectionList[0].video_reflection)
+        numpy_result = np.matrix(reflectionList[0].video_reflection)
         # list_reflections=list()
         reflectionList.pop(0)
         for reflection_item in reflectionList:
-            numpy_result = np.append(reflectionList_numpy,np.matrix(reflection_item.video_reflection),axis=0)
+            numpy_result = np.append(numpy_result,np.matrix(reflection_item.video_reflection),axis=0)
         # print("# a的每⼀列中最常见的成员为：{}，分别出现了{}次。".format(stats.mode(numpy_result)[0][0], stats.mode(numpy_result)[1][0]))
         self.reflectionlists={}
         self.reflectionlists=stats.mode(numpy_result)[0][0]
@@ -73,7 +73,7 @@ class PlayVideoPage(Page):
                 with default_storage.open(Path(f"media/{filename}"), 'wb+') as destination:
                     for chunk in file_obj.chunks():
                         destination.write(chunk)
-                reflectionList=[]
+                reflectionarray=[]
                 vc = cv2.VideoCapture("mysite/media/media/"+filename)
                 # print("mysite/media/media/"+filename)
                 if predictModel.model == None:
@@ -102,9 +102,10 @@ class PlayVideoPage(Page):
                                 face_arr = np.expand_dims(face_arr, axis=0)
                                 predictions = predictModel.model.predict(face_arr)
                                 i = np.argmax(predictions, axis=1)
+                                i = int(i)
                         else: i=8
-                        reflectionList.append(i)
-                results = np.array(reflectionList)
+                        reflectionarray.append(i)
+                results = np.array(reflectionarray)
                 n = reflection(video_num=self.video_num,video_reflection=results.transpose())
                 n.save()
             return render(request, "play_video/play_video.html", {'page': self})
