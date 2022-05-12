@@ -1,3 +1,5 @@
+from collections import Counter
+
 from django.db import models
 from django.shortcuts import render
 from django.conf import settings
@@ -33,6 +35,7 @@ class PlayVideoPage(Page):
 
     max_count = 2
     reflectionlists={}
+    reflectionScore={}
     length = float(0)
     name_title = models.CharField(max_length=100, blank=False, null=True)
     video_url = models.URLField(max_length=100, blank=False, null=True)
@@ -51,15 +54,19 @@ class PlayVideoPage(Page):
 
     def serve(self, request):
         reflectionList = list(reflection.objects.filter(video_num=self.video_num))
-        numpy_result = np.matrix(reflectionList[0].video_reflection)
-        # list_reflections=list()
-        reflectionList.pop(0)
-        for reflection_item in reflectionList:
-            numpy_result = np.append(numpy_result,np.matrix(reflection_item.video_reflection),axis=0)
-        # print("# a的每⼀列中最常见的成员为：{}，分别出现了{}次。".format(stats.mode(numpy_result)[0][0], stats.mode(numpy_result)[1][0]))
-        self.reflectionlists={}
-        self.reflectionlists=stats.mode(numpy_result)[0][0]
-        self.length=1/len(self.reflectionlists)
+        if len(reflectionList)!= 0:
+            numpy_result = np.matrix(reflectionList[0].video_reflection)
+            # list_reflections=list()
+            reflectionList.pop(0)
+            for reflection_item in reflectionList:
+                numpy_result = np.append(numpy_result,np.matrix(reflection_item.video_reflection),axis=0)
+            # print("# a的每⼀列中最常见的成员为：{}，分别出现了{}次。".format(stats.mode(numpy_result)[0][0], stats.mode(numpy_result)[1][0]))
+            dict1 = Counter(stats.mode(numpy_result)[0][0])
+            fpssum = sum(dict1.values())
+            self.reflectionScore={0:'{:.2%}'.format(0 if dict1.get(0) is None else dict1.get(0) / fpssum), 1: '{:.2%}'.format(0 if dict1.get(1) is None else dict1.get(1) / fpssum), 2: '{:.2%}'.format(0 if dict1.get(2) is None else dict1.get(2) / fpssum), 3: '{:.2%}'.format(0 if dict1.get(3) is None else dict1.get(3) / fpssum), 4: '{:.2%}'.format(0 if dict1.get(4) is None else dict1.get(4) / fpssum), 5: '{:.2%}'.format(0 if dict1.get(5) is None else dict1.get(5) / fpssum), 6: '{:.2%}'.format(0 if dict1.get(6) is None else dict1.get(6) / fpssum), 8: '{:.2%}'.format(0 if dict1.get(8) is None else dict1.get(8) / fpssum)}
+            self.reflectionlists={}
+            self.reflectionlists=stats.mode(numpy_result)[0][0]
+            self.length=1/len(self.reflectionlists)
         #     for i in np.hsplit(numpy_result, np.shape(numpy_result)[1]):
         #         print(np.shape(i.transpose()))
         #         print(i.transpose())

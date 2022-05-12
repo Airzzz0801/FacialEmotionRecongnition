@@ -93,13 +93,13 @@
     </script>
 
     <form class="input-group mb-3" method="POST" enctype="multipart/form-data" id="form1">
-          <div class="file-drop-area"> <span class="choose-file-button btn-primary blue button">Choose Files</span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple> </div>
+          <div class="file-drop-area"> <span class="choose-file-button btn-primary button" style="height:60px;width:60px;background: url({% static 'icons/icons_bs/icons/Uploads.png' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:local"></span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".jfif,.jpg,.jpeg,.png,.gif" multiple> </div>
           {% csrf_token %}
           <div class="container-fluid p-2">
-                <button class="btn btn-primary blue button" type="submit" id="inputGroupFileAddon04">Upload</button>
+                <button class="button" type="submit" id="inputGroupFileAddon04" style="height:60px;width:60px;background: url({% static 'icons/icons_bs/icons/start.png' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:local"></button>
           </div>
     </form>
-    <h6>List of selected/uploaded files <span style="font-style: italic">(click to open in new tab)</span>: </h6>
+    <h6>List of selected/uploaded files <span style="font-style: italic"></span>: </h6>
     <ul>
 
     {% for my_file1 in my_uploaded_file_names %}
@@ -115,7 +115,7 @@
 <div class=" ">
   <form method="POST" id="start">
     {% csrf_token %}
-    <button class="btn btn-primary red button" type="submit" name="start" id="start">Start</button>
+    <button class="button" type="submit" name="start" id="start"style="height:60px;width:60px;background: url({% static 'icons/icons_bs/icons/restart.png' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:local"></button>
   </form>
 </div>
 

@@ -52,14 +52,14 @@
             {% endfor %}
         </div>
         <div style="background-color:rgba(255,255,255,0);width:762px;height: 10px;margin-top: 30px ">
-            <div class = "colorsimple" style="background-color: darkred;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Angry</div>
-             <div class = "colorsimple" style="background-color: black;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Disgust</div>
-             <div class = "colorsimple" style="background-color: purple;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Fear</div>
-             <div class = "colorsimple" style="background-color: orange;width:12.5%;height: 20px;float: left;font-size: 10px">Happy</div>
-             <div class = "colorsimple" style="background-color: blue;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Sad</div>
-             <div class = "colorsimple" style="background-color: pink;width:12.5%;height: 20px;float: left;font-size: 10px">Surprise</div>
-             <div class = "colorsimple" style="background-color: white;width:12.5%;height: 20px;float: left;font-size: 10px">Neutral</div>
-             <div class = "colorsimple" style="background-color: #ff0000;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Noface</div>
+            <div class = "colorsimple" style="background-color: darkred;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Angry:{{page.reflectionScore.0}}</div>
+             <div class = "colorsimple" style="background-color: black;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Disgust:{{page.reflectionScore.1}}</div>
+             <div class = "colorsimple" style="background-color: purple;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Fear:{{page.reflectionScore.2}}</div>
+             <div class = "colorsimple" style="background-color: orange;width:12.5%;height: 20px;float: left;font-size: 10px">Happy:{{page.reflectionScore.3}}</div>
+             <div class = "colorsimple" style="background-color: blue;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Sad:{{page.reflectionScore.4}}</div>
+             <div class = "colorsimple" style="background-color: pink;width:12.5%;height: 20px;float: left;font-size: 10px">Surprise:{{page.reflectionScore.5}}</div>
+             <div class = "colorsimple" style="background-color: white;width:12.5%;height: 20px;float: left;font-size: 10px">Neutral:{{page.reflectionScore.6}}</div>
+             <div class = "colorsimple" style="background-color: #ff0000;width:12.5%;height: 20px;float: left;color: white;font-size: 10px">Noface:{{page.reflectionScore.8}}</div>
         </div>
 <!--        <div id = "outputtests" type="hidden">{{page.reflectionlists}}</div>-->
         <div id = "outputtest" hidden="hidden">{{page.length}}</div>
@@ -132,10 +132,10 @@
           });
     </script>
     <form class="input-group mb-3" method="POST" enctype="multipart/form-data" id="form1" style="margin-top: 200px">
-          <div class="file-drop-area"> <span class="choose-file-button btn-primary blue button">Choose Files</span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".mp4" multiple> </div>
+          <div class="file-drop-area"> <span class="button"style="height:60px;width:60px;background: url({% static 'icons/icons_bs/icons/Uploads.png' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:local"></span> <span class="file-message">or drag and drop files here</span> <input type="file" name="file_data" class="file-input" accept=".mp4" multiple> </div>
           {% csrf_token %}
           <div class="container-fluid p-2">
-                <button class="btn btn-primary blue button" type="submit" id="inputGroupFileAddon04">Upload</button>
+                <button class="button" type="submit" id="inputGroupFileAddon04"style="height:60px;width:60px;background: url({% static 'icons/icons_bs/icons/start.png' %});background-repeat: no-repeat;background-size: 100% 100%;background-attachment:local"></button>
           </div>
     </form>
 </div>
